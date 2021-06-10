@@ -1,0 +1,2 @@
+# CLOWNIFY DISCORD BOT
+Clowns people.

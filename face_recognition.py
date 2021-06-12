@@ -12,7 +12,7 @@ def detectAndDisplay(frame):
     for (x, y, w, h) in faces:
         face = Face((x, y, w, h))
         center = face.getFaceCenter()
-        frame = cv2.ellipse(frame, center, (face.w // 2, face.h // 2), 0, 0, 360, (255, 0, 255), 4)
+        # frame = cv2.ellipse(frame, center, (face.w // 2, face.h // 2), 0, 0, 360, (255, 0, 255), 4)
         # or draw clown stuff (cv2.addWeighted) ^
         faceROI = frame_gray[face.y:face.y + face.h, face.x:face.x + face.w]
         # -- In each face, detect eyes and nose
@@ -25,7 +25,7 @@ def detectAndDisplay(frame):
             face.addEyeObject(eye)
             eye_center = eye.getEyeCenter()
             radius = int(round((w2 + h2) * 0.25))
-            frame = cv2.circle(frame, eye_center, radius, (255, 0, 0), 4)
+            # frame = cv2.circle(frame, eye_center, radius, (255, 0, 0), 4)
             # or draw clown stuff (cv2.addWeighted) ^
         """noses dataset not good; estimate nose based on closest"""
         # distance from middle of eyes to detected nose

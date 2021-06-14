@@ -6,15 +6,19 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix='.')
 
+
 @bot.event
 async def on_ready():
     print("ClownBot is good to go!")
 
-@bot.command()
+
+@bot.command(brief="Shows how trash Allen's internet is")
 async def latency(ctx):
     await ctx.send(f'{int(bot.latency * 1000)} ' + 'ms')
-    
-@bot.command()
+
+
+@bot.command(brief='Ask me a yes/no question and I will reply',
+             description="'.ask Am I beautiful' and I will reply yes - you are c:")
 async def ask(ctx):
     num = random.randint(0, 1)
     if num == 0:
@@ -23,7 +27,8 @@ async def ask(ctx):
         await ctx.send('no')
 
 
-@bot.command()
+@bot.command(brief='Submit an attachment of a person and I will clown them',
+             description="Upload a file --> type .clown in 'add comment'")
 async def clown(ctx):
     if len(ctx.message.attachments) < 0:
         await ctx.send("Give me an image you clown...")
@@ -39,6 +44,7 @@ async def clown(ctx):
         await attachment.save(file_path)
         run(file_path)
         await ctx.send(file=discord.File('images/recent_out.jpg'))
+
 
 token = input("What is your bot token? ")
 bot.run(token)

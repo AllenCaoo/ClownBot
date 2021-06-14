@@ -22,20 +22,20 @@ async def ask(ctx):
     else:
         await ctx.send('no')
 
-@bot.event
-async def on_message(ctx):
-    print("DEBUG:", ctx.attachments)
 
 @bot.command()
 async def clown(ctx):
-    info = ctx.attachments
-    url = info['url']
-    if len(info) < 0:
+    if len(ctx.message.attachments) < 0:
         await ctx.send("Give me an image you clown...")
-    elif not url[-3:] == 'jpg' and not url[-3:] == 'png':
+    elif len(ctx.message.attachments) > 1:
+        await ctx.send("Only send one attachment you clown...")
+    attachment = ctx.message.attachments[0]  # first attachment object
+    print(attachment)
+    url = attachment.url
+    if not url[-3:] == 'jpg' and not url[-3:] == 'png':
         await ctx.send("Only jpg and png please.")
     else:
-        file = await info[0].to_file()
+        file = await attachment.to_file()
         file.filename = 'recent.png'
         embed = discord.Embed()
         embed.set_image(url='attachment://recent.png')

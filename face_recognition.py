@@ -107,4 +107,4 @@ def run(img):
     '''
     image = cv2.imread(img)
     clowned_img = detectAndDisplay(image)
-    cv2.imwrite('images/clown.jpg', clowned_img)
+    cv2.imwrite('images/recent_out.jpg', clowned_img)

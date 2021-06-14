@@ -35,11 +35,10 @@ async def clown(ctx):
     if not url[-3:] == 'jpg' and not url[-3:] == 'png':
         await ctx.send("Only jpg and png please.")
     else:
-        file = await attachment.to_file()
-        file.filename = 'recent.png'
-        embed = discord.Embed()
-        embed.set_image(url='attachment://recent.png')
-        await ctx.send(file=file, embed=embed)
+        file_path = 'images/recent_in.jpg'
+        await attachment.save(file_path)
+        run(file_path)
+        await ctx.send(file=discord.File('images/recent_out.jpg'))
 
 token = input("What is your bot token? ")
 bot.run(token)

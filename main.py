@@ -1,4 +1,6 @@
 import discord
+import cv2
+from face_recognition import run
 import random
 from discord.ext import commands
 
@@ -19,6 +21,25 @@ async def ask(ctx):
         await ctx.send('yes')
     else:
         await ctx.send('no')
+
+@bot.event
+async def on_message(ctx):
+    print("DEBUG:", ctx.attachments)
+
+@bot.command()
+async def clown(ctx):
+    info = ctx.attachments
+    url = info['url']
+    if len(info) < 0:
+        await ctx.send("Give me an image you clown...")
+    elif not url[-3:] == 'jpg' and not url[-3:] == 'png':
+        await ctx.send("Only jpg and png please.")
+    else:
+        file = await info[0].to_file()
+        file.filename = 'recent.png'
+        embed = discord.Embed()
+        embed.set_image(url='attachment://recent.png')
+        await ctx.send(file=file, embed=embed)
 
 token = input("What is your bot token? ")
 bot.run(token)

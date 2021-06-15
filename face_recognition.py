@@ -56,7 +56,7 @@ def detectAndDisplay(frame, display=False):
 
 def run(img):
     global face_cascade, eyes_cascade, noses_cascade
-    parser = argparse.ArgumentParser(description='Code for Cascade Classifier tutorial.')
+    parser = argparse.ArgumentParser(description='Basic Cascade Classifiers.')
     parser.add_argument('--face_cascade', help='Path to face cascade.',
                         default='haar_cascade_weights/haarcascade_frontalface_alt.xml')
     parser.add_argument('--eyes_cascade', help='Path to eyes cascade.',

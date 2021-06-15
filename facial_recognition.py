@@ -12,6 +12,8 @@ def detectAndDisplay(frame, display=False):
     frame_gray = cv2.equalizeHist(frame_gray)
     # -- Detect faces
     faces = face_cascade.detectMultiScale(frame_gray)
+    if len(faces) == 0:
+        return None
     for (x, y, w, h) in faces:
         face = Face((x, y, w, h))
         center = face.getFaceCenter()
@@ -29,10 +31,12 @@ def detectAndDisplay(frame, display=False):
         for (x2, y2, w2, h2) in eyes:
             eye = Eye((x2, y2, w2, h2), face)
             face.addEyeObject(eye)
+            '''DEBUG
             eye_center = eye.getEyeCenter()
             radius = int(round((w2 + h2) * 0.25))
-            #DEBUG: frame = cv2.circle(frame, eye_center, radius, (255, 0, 0), 4)
+            frame = cv2.circle(frame, eye_center, radius, (255, 0, 0), 4)
             # or draw clown stuff (cv2.addWeighted) ^
+            '''
         """noses dataset not good; estimate nose based on closest"""
         # distance from middle of eyes to detected nose
         (min_center, min_dist) = ((0, 0), float('inf'))
@@ -107,4 +111,8 @@ def run(img):
     '''
     image = cv2.imread(img)
     clowned_img = detectAndDisplay(image)
-    cv2.imwrite('images/recent_out.jpg', clowned_img)
+    if clowned_img is None:
+        return False
+    else:
+        cv2.imwrite('images/recent_out.jpg', clowned_img)
+        return True

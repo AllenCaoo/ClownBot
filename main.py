@@ -1,8 +1,9 @@
 import discord
-import cv2
-from face_recognition import run
+from facial_recognition import run
 import random
 from discord.ext import commands
+import cv2
+import numpy as np
 
 bot = commands.Bot(command_prefix='.')
 
@@ -40,10 +41,14 @@ async def clown(ctx):
     if not url[-3:] == 'jpg' and not url[-3:] == 'png' and not url[-3:] == 'JPG':
         await ctx.send("Only jpg and png please.")
     else:
-        file_path = 'images/recent_in.jpg'
-        await attachment.save(file_path)
-        run(file_path)
-        await ctx.send(file=discord.File('images/recent_out.jpg'))
+        in_path = 'images/recent_in.jpg'
+        out_path = 'images/recent_out.jpg'
+        await attachment.save(in_path)
+        found_face = run(in_path)
+        if not found_face:
+            await ctx.send("No face found.")
+        else:
+            await ctx.send(file=discord.File(out_path))
 
 
 token = input("What is your bot token? ")

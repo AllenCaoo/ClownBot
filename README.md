@@ -7,5 +7,5 @@ Clowns people.
 - clown
 
 Type .help in your server for more info 
-(or .help[command] for more descriptive
+(or .help [command] for more descriptive
 information)

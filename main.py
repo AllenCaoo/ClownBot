@@ -2,15 +2,15 @@ import discord
 from facial_recognition import run
 import random
 from discord.ext import commands
-import cv2
-import numpy as np
 
+owner_id = open(".info/owner_id.txt", "r").read()  # put your id in .info/owner_id.txt
 bot = commands.Bot(command_prefix='.')
 
 
 @bot.event
 async def on_ready():
     print("ClownBot is good to go!")
+    print(f"The owner is {owner_id}")
 
 
 @bot.command(brief="Shows how trash Allen's internet is")
@@ -46,7 +46,7 @@ async def clown(ctx):
         await attachment.save(in_path)
         found_face = run(in_path)
         if not found_face:
-            await ctx.send("No face found.")
+            await ctx.send("No person found.")
         else:
             await ctx.send(file=discord.File(out_path))
 

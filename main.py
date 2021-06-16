@@ -53,7 +53,7 @@ async def clown(ctx):
     elif len(ctx.message.attachments) > 1:
         await ctx.send("Only send one attachment you clown...")
     attachment = ctx.message.attachments[0]  # first attachment object
-    print(attachment)
+    print(f'{ctx.message.author} clowned {attachment}')
     url = attachment.url
     if not url[-3:] == 'jpg' and not url[-3:] == 'png' and not url[-3:] == 'JPG':
         await ctx.send("Only jpg and png please.")

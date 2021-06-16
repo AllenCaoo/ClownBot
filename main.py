@@ -1,12 +1,15 @@
+import warnings
+
 import cv2
 import discord
-from facial_recognition import run
+from facial_recognition_haar import run
+from facial_recognition_CNN import draw_nose
 import random
 from discord.ext import commands
 
 owner_id = open(".info/owner_id.txt", "r").read()  # put your id in .info/owner_id.txt
 bot = commands.Bot(command_prefix='.')
-
+warnings.filterwarnings("ignore", category=UserWarning)
 
 @bot.event
 async def on_ready():
@@ -58,7 +61,7 @@ async def clown(ctx):
         in_path = 'images/recent_in.jpg'
         out_path = 'images/recent_out.jpg'
         await attachment.save(in_path)
-        found_face = run(in_path)
+        found_face = draw_nose(in_path)
         if not found_face:
             await ctx.send("No person found.")
         else:

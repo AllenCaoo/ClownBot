@@ -17,7 +17,7 @@ def draw_nose(img_path):
     _, _, landmarks = mtcnn.detect(img, landmarks=True)
 
     # Draw nose
-    if len(landmarks):
+    if landmarks is not None:
         for landmark in landmarks:
             pt1 = np.int_(landmark[0, 0]), np.int_(landmark[0, 1])
             pt2 = np.int_(landmark[1, 0]), np.int_(landmark[1, 1])

@@ -15,6 +15,10 @@ warnings.filterwarnings("ignore", category=UserWarning)
 async def on_ready():
     print("ClownBot is good to go!")
     print(f"The owner is {owner_id}")
+    print("Servers this bot is on: ")
+    servers = bot.guilds
+    for i in range(len(servers)):
+        print(f"{i + 1}. {servers[i].name}")
 
 
 @bot.command()
@@ -69,6 +73,7 @@ async def clown(ctx):
             await ctx.send("Please submit an image with more distinct facial features.")
         else:
             await ctx.send(file=discord.File(out_path))
+
 
 
 token = input("What is your bot token? ")

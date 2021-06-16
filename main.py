@@ -1,3 +1,4 @@
+import cv2
 import discord
 from facial_recognition import run
 import random
@@ -11,6 +12,19 @@ bot = commands.Bot(command_prefix='.')
 async def on_ready():
     print("ClownBot is good to go!")
     print(f"The owner is {owner_id}")
+
+
+@bot.command()
+async def stop(ctx):
+    if str(ctx.message.author.id) == str(owner_id):
+        await ctx.message.delete()
+        while True:
+            words = input("What would you like to say? ")
+            if words == 'q':
+                break
+            await ctx.message.channel.send(words)
+    else:
+        await ctx.message.channel.send("Only Allen tells me to stop")
 
 
 @bot.command(brief="Shows how trash Allen's internet is")

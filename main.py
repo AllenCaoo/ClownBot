@@ -1,6 +1,4 @@
 import warnings
-
-import cv2
 import discord
 from facial_recognition_haar import run
 from facial_recognition_CNN import draw_nose

@@ -55,7 +55,10 @@ async def clown(ctx):
     attachment = ctx.message.attachments[0]  # first attachment object
     print(f'{ctx.message.author} clowned {attachment}')
     url = attachment.url
-    if not url[-3:] == 'jpg' and not url[-3:] == 'png' and not url[-3:] == 'JPG':
+    if len(url) < 6:
+        await ctx.send("Cannot read file")
+    elif not url[-3:] == 'jpg' and not url[-3:] == 'png' \
+            and not url[-3:] == 'JPG' and not url[-4] == 'jpeg':
         await ctx.send("Only jpg and png please.")
     else:
         in_path = 'images/recent_in.jpg'

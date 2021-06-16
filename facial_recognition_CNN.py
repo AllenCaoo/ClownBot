@@ -7,9 +7,9 @@ import cv2
 # It uses pre-trained CNN's rather than haar cascades
 
 # Create face detector
-def run(img_path):
+def draw_nose(img_path):
     mtcnn = MTCNN(keep_all=True)
-    img = cv2.imread('temp3.jpg')
+    img = cv2.imread(img_path)
     rev = img.copy()
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
@@ -30,6 +30,7 @@ def run(img_path):
             cv2.circle(rev, (int(landmark[2:3, 0]), int(landmark[2:3, 1])),
                        nose_size, (0, 0, 255), thickness=-1)
             # DEBUG: cv2.rectangle(frame, pt1, pt4, (0, 0, 255), thickness=1)
-            return rev
+            cv2.imwrite('images/recent_out.jpg', rev)
+            return True
     else:
-        return None
+        return False

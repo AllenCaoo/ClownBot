@@ -63,7 +63,7 @@ async def clown(ctx):
         await attachment.save(in_path)
         found_face = draw_nose(in_path)
         if not found_face:
-            await ctx.send("No person found.")
+            await ctx.send("Please submit an image with more distinct facial features.")
         else:
             await ctx.send(file=discord.File(out_path))
 

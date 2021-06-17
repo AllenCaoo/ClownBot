@@ -6,6 +6,7 @@ import random
 from discord.ext import commands
 
 owner_id = open(".info/owner_id.txt", "r").read()  # put your id in .info/owner_id.txt
+token = open(".info/token.txt", "r").read()  # put your bot token.txt in .info/owner_id.txt
 bot = commands.Bot(command_prefix='.')
 warnings.filterwarnings("ignore", category=UserWarning)
 
@@ -74,5 +75,4 @@ async def clown(ctx):
             await ctx.send(file=discord.File(out_path))
 
 
-token = input("What is your bot token? ")
 bot.run(token)

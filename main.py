@@ -9,6 +9,7 @@ owner_id = open(".info/owner_id.txt", "r").read()  # put your id in .info/owner_
 bot = commands.Bot(command_prefix='.')
 warnings.filterwarnings("ignore", category=UserWarning)
 
+
 @bot.event
 async def on_ready():
     print("ClownBot is good to go!")
@@ -50,7 +51,7 @@ async def ask(ctx):
 @bot.command(brief='Submit an attachment of a person and I will clown them',
              description="Upload a file --> type .clown in 'add comment'")
 async def clown(ctx):
-    if len(ctx.message.attachments) < 0:
+    if len(ctx.message.attachments) < 1:
         await ctx.send("Give me an image you clown...")
     elif len(ctx.message.attachments) > 1:
         await ctx.send("Only send one attachment you clown...")
@@ -71,7 +72,6 @@ async def clown(ctx):
             await ctx.send("Please submit an image with more distinct facial features.")
         else:
             await ctx.send(file=discord.File(out_path))
-
 
 
 token = input("What is your bot token? ")

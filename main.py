@@ -14,11 +14,11 @@ warnings.filterwarnings("ignore", category=UserWarning)
 @bot.event
 async def on_ready():
     print("ClownBot is good to go!")
-    print(f"The owner is {owner_id}")
+    print("The owner is {owner}".format(owner=str(owner_id)))
     print("Servers this bot is on: ")
     servers = bot.guilds
     for i in range(len(servers)):
-        print(f"{i + 1}. {servers[i].name}")
+        print("{number}. {server_name}".format(number=i + 1, server_name=servers[i]))
 
 
 @bot.command()
@@ -36,7 +36,7 @@ async def stop(ctx):
 
 @bot.command(brief="Shows how trash Allen's internet is")
 async def latency(ctx):
-    await ctx.send(f'{int(bot.latency * 1000)} ' + 'ms')
+    await ctx.send('{latency} ms'.format(latency=bot.latency))
 
 
 @bot.command(brief='Ask me a yes/no question and I will reply',
@@ -57,7 +57,7 @@ async def clown(ctx):
     elif len(ctx.message.attachments) > 1:
         await ctx.send("Only send one attachment you clown...")
     attachment = ctx.message.attachments[0]  # first attachment object
-    print(f'{ctx.message.author} clowned {attachment}')
+    print('{author} clowned {attachment}'.format(author=ctx.message.author, attachment=attachment))
     url = attachment.url
     if len(url) < 6:
         await ctx.send("Cannot read file")

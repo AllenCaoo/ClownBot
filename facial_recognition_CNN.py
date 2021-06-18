@@ -32,6 +32,7 @@ def draw_nose(img_path):
             cv2.circle(rev, (int(landmark[2:3, 0]), int(landmark[2:3, 1])),
                        nose_size, (0, 0, 255), thickness=-1)
             # DEBUG: cv2.rectangle(frame, pt1, pt4, (0, 0, 255), thickness=1)
+            found = True
         cv2.imwrite('images/recent_out.jpg', rev)
         return found
     else:

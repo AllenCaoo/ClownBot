@@ -10,7 +10,7 @@ token = open(".info/token.txt", "r").read()  # put your bot token.txt in .info/o
 bot = commands.Bot(command_prefix='.')
 warnings.filterwarnings("ignore", category=UserWarning)
 yes_no_questions = ['is', 'are', 'will', 'wont', "won't", 'do', 'does', "don't",
-                    'dont', 'doesnt', "doesn't"]
+                    'dont', 'doesnt', "doesn't", "am"]
 
 
 @bot.event
@@ -44,8 +44,10 @@ async def latency(ctx):
 @bot.command(brief='Ask me a yes/no question and I will reply',
              description="'.ask Am I beautiful' and I will reply yes - you are c:")
 async def ask(ctx):
-    print(ctx.message.author + " asks " + ctx.message.content)
-    question = ctx.message.content.lower().split()
+    print("{author} asks {question}".format
+          (author=ctx.message.author, question=ctx.message.content))
+    question = ctx.message.content[5:].lower().split()  # ".ask " is 4 characters long
+    print(question)
     if question[0] not in yes_no_questions:
         await ctx.send("I don't know ask Pennywise.")
     else:

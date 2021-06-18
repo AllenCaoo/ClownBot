@@ -56,23 +56,24 @@ async def clown(ctx):
         await ctx.send("Give me an image you clown...")
     elif len(ctx.message.attachments) > 1:
         await ctx.send("Only send one attachment you clown...")
-    attachment = ctx.message.attachments[0]  # first attachment object
-    print('{author} clowned {attachment}'.format(author=ctx.message.author, attachment=attachment))
-    url = attachment.url
-    if len(url) < 6:
-        await ctx.send("Cannot read file")
-    elif not url[-3:] == 'jpg' and not url[-3:] == 'png' \
-            and not url[-3:] == 'JPG' and not url[-4] == 'jpeg':
-        await ctx.send("Only jpg and png please.")
     else:
-        in_path = 'images/recent_in.jpg'
-        out_path = 'images/recent_out.jpg'
-        await attachment.save(in_path)
-        found_face = draw_nose(in_path)
-        if not found_face:
-            await ctx.send("Please submit an image with more distinct facial features.")
+        attachment = ctx.message.attachments[0]  # first attachment object
+        print('{author} clowned {attachment}'.format(author=ctx.message.author, attachment=attachment))
+        url = attachment.url
+        if len(url) < 6:
+            await ctx.send("Cannot read file")
+        elif not url[-3:] == 'jpg' and not url[-3:] == 'png' \
+                and not url[-3:] == 'JPG' and not url[-4] == 'jpeg':
+            await ctx.send("Only jpg and png please.")
         else:
-            await ctx.send(file=discord.File(out_path))
+            in_path = 'images/recent_in.jpg'
+            out_path = 'images/recent_out.jpg'
+            await attachment.save(in_path)
+            found_face = draw_nose(in_path)
+            if not found_face:
+                await ctx.send("Please submit an image with more distinct facial features.")
+            else:
+                await ctx.send(file=discord.File(out_path))
 
 
 bot.run(token)

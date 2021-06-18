@@ -36,7 +36,7 @@ async def stop(ctx):
 
 @bot.command(brief="Shows how trash Allen's internet is")
 async def latency(ctx):
-    await ctx.send('{latency} ms'.format(latency=bot.latency))
+    await ctx.send('{latency} ms'.format(latency=bot.latency*1000))
 
 
 @bot.command(brief='Ask me a yes/no question and I will reply',

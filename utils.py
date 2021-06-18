@@ -1,7 +1,7 @@
 import math
 
 
-circus_tent = ":circus_tent"
+circus_tent = ":circus_tent:"
 partying_face = ":partying_face:"
 
 def dist(pt1, pt2):

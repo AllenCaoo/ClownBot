@@ -1,5 +1,7 @@
 import warnings
 import discord
+
+import utils
 from facial_recognition_haar import run
 from facial_recognition_CNN import draw_nose
 import random
@@ -56,7 +58,7 @@ async def ask(ctx):
 @bot.command(brief='ClownBot is happy and will celebrate in chat',
              description='I will put some emojis in the chat in which this command is typed')
 async def celebrate(ctx):
-    lst = [":circus_tent:", ":partying_face:"]  # Maybe add more emojis
+    lst = [utils.circus_tent, utils.partying_face]  # Maybe add more emojis
     num_emojis = random.randint(3, 10)  # Choose random number of emojis between 3 and 10
     rev = ""
     for _ in range(num_emojis):
@@ -78,8 +80,7 @@ async def clown(ctx):
         url = attachment.url
         if len(url) < 6:
             await ctx.send("Cannot read file")
-        elif not url[-3:] == 'jpg' and not url[-3:] == 'png' \
-                and not url[-3:] == 'JPG' and not url[-4] == 'jpeg':
+        elif not utils.is_image(url):
             await ctx.send("Only jpg and png please.")
         else:
             in_path = 'images/recent_in.jpg'

@@ -9,6 +9,8 @@ owner_id = open(".info/owner_id.txt", "r").read()  # put your id in .info/owner_
 token = open(".info/token.txt", "r").read()  # put your bot token.txt in .info/owner_id.txt
 bot = commands.Bot(command_prefix='.')
 warnings.filterwarnings("ignore", category=UserWarning)
+yes_no_questions = ['is', 'are', 'will', 'wont', "won't", 'do', 'does', "don't",
+                    'dont', 'doesnt', "doesn't"]
 
 
 @bot.event
@@ -42,11 +44,16 @@ async def latency(ctx):
 @bot.command(brief='Ask me a yes/no question and I will reply',
              description="'.ask Am I beautiful' and I will reply yes - you are c:")
 async def ask(ctx):
-    num = random.randint(0, 1)
-    if num == 0:
-        await ctx.send('yes')
+    print(ctx.message.author + " asks " + ctx.message.content)
+    question = ctx.message.content.lower().split()
+    if question[0] not in yes_no_questions:
+        await ctx.send("I don't know ask Pennywise.")
     else:
-        await ctx.send('no')
+        num = random.randint(0, 1)
+        if num == 0:
+            await ctx.send('yes')
+        else:
+            await ctx.send('no')
 
 
 @bot.command(brief='Submit an attachment of a person and I will clown them',

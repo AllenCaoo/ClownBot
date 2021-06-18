@@ -1,6 +1,7 @@
 import warnings
 import discord
 
+import question_ping
 import utils
 from facial_recognition_haar import run
 from facial_recognition_CNN import draw_nose
@@ -91,6 +92,17 @@ async def clown(ctx):
                 await ctx.send("Please submit an image with more distinct facial features.")
             else:
                 await ctx.send(file=discord.File(out_path))
+
+
+@bot.command()
+async def ping(ctx):
+    attachment = ctx.message.attachments[0]  # first attachment object
+    in_path = 'images/recent_in'
+    out_path = 'images/recent_out.jpg'
+    await attachment.save(in_path)
+    question_ping.draw_pings(in_path)
+    await ctx.send(file=discord.File(out_path))
+
 
 
 @bot.command(brief="Shows how trash Allen's internet is")

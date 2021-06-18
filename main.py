@@ -38,7 +38,7 @@ async def stop(ctx):
 
 @bot.command(brief="Shows how trash Allen's internet is")
 async def latency(ctx):
-    await ctx.send('{latency} ms'.format(latency=bot.latency*1000))
+    await ctx.send('{latency} ms'.format(latency=bot.latency * 1000))
 
 
 @bot.command(brief='Ask me a yes/no question and I will reply',
@@ -56,6 +56,18 @@ async def ask(ctx):
             await ctx.send('yes')
         else:
             await ctx.send('no')
+
+
+@bot.command(brief='ClownBot is happy and will celebrate in chat',
+             description='I will put some emojis in the chat in which this command is typed')
+async def celebrate(ctx):
+    lst = [":circus_tent:", ":partying_face:"]  # Maybe add more emojis
+    num_emojis = random.randint(3, 10)  # Choose random number of emojis between 3 and 10
+    rev = ""
+    for _ in range(num_emojis):
+        index = random.randint(0, len(lst) - 1)
+        rev += lst[index]
+    await ctx.send(rev)
 
 
 @bot.command(brief='Submit an attachment of a person and I will clown them',

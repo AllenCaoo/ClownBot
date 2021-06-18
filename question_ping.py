@@ -14,6 +14,6 @@ def draw_pings(img_path):
     for _ in range(10):
         x = random.randint(0, x_range[1] - 1)
         y = random.randint(0, y_range[1] - 1)
-        img[x: x + ping.shape[1], y: y + ping.shape[0]] = \
-            cv2.bitwise_or(img[x: x + ping.shape[1], y: y + ping.shape[0]], ping)
+        img[y: y + ping.shape[0], x: x + ping.shape[1]] = \
+            cv2.bitwise_or(img[y: y + ping.shape[0], x: x + ping.shape[1]], ping)
     cv2.imwrite('images/recent_out.jpg', img)

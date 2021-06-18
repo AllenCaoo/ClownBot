@@ -97,7 +97,7 @@ async def clown(ctx):
 @bot.command()
 async def ping(ctx):
     attachment = ctx.message.attachments[0]  # first attachment object
-    in_path = 'images/recent_in'
+    in_path = 'images/recent_in.jpg'
     out_path = 'images/recent_out.jpg'
     await attachment.save(in_path)
     question_ping.draw_pings(in_path)

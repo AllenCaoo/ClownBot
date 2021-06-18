@@ -36,11 +36,6 @@ async def stop(ctx):
         await ctx.message.channel.send("Only Allen tells me to stop")
 
 
-@bot.command(brief="Shows how trash Allen's internet is")
-async def latency(ctx):
-    await ctx.send('{latency} ms'.format(latency=bot.latency * 1000))
-
-
 @bot.command(brief='Ask me a yes/no question and I will reply',
              description="'.ask Am I beautiful' and I will reply yes - you are c:")
 async def ask(ctx):
@@ -97,4 +92,10 @@ async def clown(ctx):
                 await ctx.send(file=discord.File(out_path))
 
 
-bot.run(token)
+@bot.command(brief="Shows how trash Allen's internet is")
+async def latency(ctx):
+    await ctx.send('{latency} ms'.format(latency=bot.latency * 1000))
+
+
+if __name__ == '__main__':
+    bot.run(token)

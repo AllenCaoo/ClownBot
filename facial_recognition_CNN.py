@@ -19,6 +19,7 @@ def draw_nose(img_path):
 
     # Draw nose
     if landmarks is not None:
+        found = False
         for landmark in landmarks:
             pt1 = np.int_(landmark[0, 0]), np.int_(landmark[0, 1])
             pt2 = np.int_(landmark[1, 0]), np.int_(landmark[1, 1])
@@ -31,7 +32,7 @@ def draw_nose(img_path):
             cv2.circle(rev, (int(landmark[2:3, 0]), int(landmark[2:3, 1])),
                        nose_size, (0, 0, 255), thickness=-1)
             # DEBUG: cv2.rectangle(frame, pt1, pt4, (0, 0, 255), thickness=1)
-            cv2.imwrite('images/recent_out.jpg', rev)
-            return True
+        cv2.imwrite('images/recent_out.jpg', rev)
+        return found
     else:
         return False

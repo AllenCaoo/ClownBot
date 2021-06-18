@@ -14,5 +14,4 @@ def dist(pt1, pt2):
 
 def is_image(url):
     """Returns true if string url is an image"""
-    return url[-3:] == 'jpg' or url[-3:] == 'png' \
-                or url[-3:] == 'JPG' or url[-4] == 'jpeg'
+    return url[-3:].lower() == 'jpg' or url[-3:] == 'png' or url[-4].lower() == 'jpeg'

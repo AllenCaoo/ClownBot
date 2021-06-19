@@ -1,7 +1,7 @@
 import random
 import cv2
 
-qping = cv2.imread('images/ping2.png')
+qping = cv2.imread('images/ping.png')
 
 
 def draw_pings(img_path):

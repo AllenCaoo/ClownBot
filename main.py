@@ -12,8 +12,6 @@ owner_id = open(".info/owner_id.txt", "r").read()  # put your id in .info/owner_
 token = open(".info/token.txt", "r").read()  # put your bot token.txt in .info/owner_id.txt
 bot = commands.Bot(command_prefix='.')
 warnings.filterwarnings("ignore", category=UserWarning)
-yes_no_questions = ['is', 'are', 'will', 'wont', "won't", 'do', 'does', "don't",
-                    'dont', 'doesnt', "doesn't", "am"]
 
 
 @bot.event
@@ -46,7 +44,7 @@ async def ask(ctx):
           (author=ctx.message.author, question=ctx.message.content))
     question = ctx.message.content[5:].lower().split()  # ".ask " is 4 characters long
     print(question)
-    if question[0] not in yes_no_questions:
+    if question[0] not in utils.yes_no_questions:
         await ctx.send("I don't know ask Pennywise.")
     else:
         num = random.randint(0, 1)
@@ -102,7 +100,6 @@ async def ping(ctx):
     await attachment.save(in_path)
     question_ping.draw_pings(in_path)
     await ctx.send(file=discord.File(out_path))
-
 
 
 @bot.command(brief="Shows how trash Allen's internet is")

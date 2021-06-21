@@ -8,7 +8,7 @@ from facial_recognition_CNN import draw_nose
 import random
 from discord.ext import commands
 
-owner_id = open(".info/owner_id.txt", "r").read()  # put your id in .info/owner_id.txt
+owner_id = str(open(".info/owner_id.txt", "r").read()).replace(" ", "")  # put your id in .info/owner_id.txt
 token = open(".info/token.txt", "r").read()  # put your bot token.txt in .info/owner_id.txt
 bot = commands.Bot(command_prefix='.')
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -17,7 +17,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 @bot.event
 async def on_ready():
     print("ClownBot is good to go!")
-    print("The owner is {owner}".format(owner=str(owner_id)))
+    print("The owner is {owner}".format(owner=owner_id))
     print("Servers this bot is on: ")
     servers = bot.guilds
     for i in range(len(servers)):
@@ -26,7 +26,7 @@ async def on_ready():
 
 @bot.command()
 async def stop(ctx):
-    if str(ctx.message.author.id) == str(owner_id):
+    if str(ctx.message.author.id) == owner_id:
         await ctx.message.delete()
         while True:
             words = input("What would you like to say? ")

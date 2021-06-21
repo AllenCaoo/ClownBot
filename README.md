@@ -8,5 +8,4 @@ Clowns people.
 - latency
 
 Type .help in your server for more info 
-(or .help [command] for more descriptive
-information)
+(or .help [command] for a more detailed description of the specified command)

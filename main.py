@@ -24,19 +24,6 @@ async def on_ready():
         print("{number}. {server_name}".format(number=i + 1, server_name=servers[i]))
 
 
-@bot.command()
-async def stop(ctx):
-    if str(ctx.message.author.id) == owner_id:
-        await ctx.message.delete()
-        while True:
-            words = input("What would you like to say? ")
-            if words == 'q':
-                break
-            await ctx.message.channel.send(words)
-    else:
-        await ctx.message.channel.send("Only Allen tells me to stop")
-
-
 @bot.command(brief='Ask me a yes/no question and I will reply',
              description="'.ask Am I beautiful' and I will reply yes - you are c:")
 async def ask(ctx):
@@ -92,7 +79,8 @@ async def clown(ctx):
                 await ctx.send(file=discord.File(out_path))
 
 
-@bot.command()
+@bot.command(brief='Submit an attachment of an image and I will question ping it',
+             description="Upload a file --> type .ping in 'add comment'")
 async def ping(ctx):
     attachment = ctx.message.attachments[0]  # first attachment object
     in_path = 'images/recent_in.jpg'

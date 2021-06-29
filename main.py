@@ -82,12 +82,25 @@ async def clown(ctx):
 @bot.command(brief='Submit an attachment of an image and I will question ping it',
              description="Upload a file --> type .ping in 'add comment'")
 async def ping(ctx):
-    attachment = ctx.message.attachments[0]  # first attachment object
-    in_path = 'images/recent_in.jpg'
-    out_path = 'images/recent_out.jpg'
-    await attachment.save(in_path)
-    question_ping.draw_pings(in_path)
-    await ctx.send(file=discord.File(out_path))
+    if len(ctx.message.attachments) < 1:
+        await ctx.send("Give me an image you clown...")
+    elif len(ctx.message.attachments) > 1:
+        await ctx.send("Only send one attachment you clown...")
+    else:
+        attachment = ctx.message.attachments[0]  # first attachment object
+        print('{author} pinged {attachment}'.
+              format(author=ctx.message.author, attachment=attachment))
+        url = attachment.url
+        if len(url) < 6:
+            await ctx.send("Cannot read file")
+        elif not utils.is_image(url):
+            await ctx.send("Only jpg and png please.")
+        else:
+            in_path = 'images/recent_in.jpg'
+            out_path = 'images/recent_out.jpg'
+            await attachment.save(in_path)
+            question_ping.draw_pings(in_path)
+            await ctx.send(file=discord.File(out_path))
 
 
 @bot.command(brief="Shows how trash Allen's internet is")

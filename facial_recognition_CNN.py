@@ -21,13 +21,15 @@ def draw_nose(img_path):
     if landmarks is not None:
         found = False
         for landmark in landmarks:
-            pt1 = np.int_(landmark[0, 0]), np.int_(landmark[0, 1])
-            pt2 = np.int_(landmark[1, 0]), np.int_(landmark[1, 1])
-            features_width = utils.dist(pt1, pt2)
+            left_eye = np.int_(landmark[0, 0]), np.int_(landmark[0, 1]) # left eye
+            right_eye = np.int_(landmark[1, 0]), np.int_(landmark[1, 1]) # right eye
+            mouth_left = np.int_(landmark[3, 0]), np.int_(landmark[3, 1]) # left of mouth
+            mouth_right = np.int_(landmark[4, 0]), np.int_(landmark[4, 1]) # right of mouth
+            nose_x = int(landmark[2:3, 0])  # Nose x is located at landmark[2:3, 0]
+            nose_y = int(landmark[2:3, 1])  # Nose y is located at landmark[2:3, 0]
+            features_width = utils.dist(left_eye, right_eye)
             nose_size = int(features_width / 3)  # Approximate nose radius
-            x = int(landmark[2:3, 0])  # Nose x is located at landmark[2:3, 0]
-            y = int(landmark[2:3, 1])  # Nose y is located at landmark[2:3, 0]
-            cv2.circle(rev, (x, y), nose_size, (0, 0, 255), thickness=-1)
+            cv2.circle(rev, (nose_x, nose_y), nose_size, (0, 0, 255), thickness=-1)
             found = True
         cv2.imwrite('images/recent_out.jpg', rev)
         return found

@@ -1,5 +1,4 @@
-# CLOWNIFY DISCORD BOT
-Clowns people.
+# ClownBot Discord Bot
 
 ## Supports the following commands:
 - clown

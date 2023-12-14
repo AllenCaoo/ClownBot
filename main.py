@@ -10,7 +10,7 @@ from discord.ext import commands
 
 owner_id = str(open(".info/owner_id.txt", "r").read()).replace(" ", "")  # put your id in .info/owner_id.txt
 token = open(".info/token.txt", "r").read()  # put your bot token.txt in .info/owner_id.txt
-bot = commands.Bot(command_prefix='.')
+bot = commands.Bot(command_prefix='.', intents=discord.Intents.all())
 warnings.filterwarnings("ignore", category=UserWarning)
 
 
@@ -66,17 +66,20 @@ async def clown(ctx):
         url = attachment.url
         if len(url) < 6:
             await ctx.send("Cannot read file")
-        elif not utils.is_image(url):
-            await ctx.send("Only jpg and png please.")
+        # elif not utils.is_image(url):
+        #     await ctx.send("Only jpg and png please.")
         else:
-            in_path = 'images/recent_in.jpg'
-            out_path = 'images/recent_out.jpg'
-            await attachment.save(in_path)
-            found_face = draw_nose(in_path)
-            if not found_face:
-                await ctx.send("Please submit an image with more distinct facial features.")
-            else:
-                await ctx.send(file=discord.File(out_path))
+            try:
+                in_path = 'images/recent_in.jpg'
+                out_path = 'images/recent_out.jpg'
+                await attachment.save(in_path)
+                found_face = draw_nose(in_path)
+                if not found_face:
+                    await ctx.send("Please submit an image with more distinct facial features.")
+                else:
+                    await ctx.send(file=discord.File(out_path))
+            except:
+                await ctx.send("It don't work")
 
 
 @bot.command(brief='Submit an attachment of an image and I will question ping it',
